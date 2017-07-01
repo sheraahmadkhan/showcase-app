@@ -37,16 +37,21 @@ public class Board {
 //            int yPosition = random.nextInt(cols - 1);
 //            Cell cell = oldStateOfCells.get(xPosition + "-" + yPosition);
             oldStateOfCells.values().forEach(cell -> {
-                try {
-                    Thread.sleep(1000);
+                /*try {
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
+                }*/
                 Position currentPosition = cell.currentPosition();
                 Position nextPosition = cell.next();
                 Position previousPosition = cell.previous();
                 Position abovePosition = cell.above();
                 Position belowPosition = cell.below();
+                Position aboveLeftDiagonalPosition = cell.aboveLeftDiagonal();
+                Position aboveRightDiagonalPosition = cell.aboveRightDiagonal();
+                Position belowLeftDiagonalPosition = cell.belowLeftDiagonal();
+                Position belowRightDiagonalPosition = cell.belowRightDiagonal();
+
                 Collection<Boolean> states = new ArrayList<>();
                 if (oldStateOfCells.containsKey(nextPosition.getX() + "-" + nextPosition.getY())) {
                     Cell nextCell = oldStateOfCells.get(nextPosition.getX() + "-" + nextPosition.getY());
@@ -68,8 +73,27 @@ public class Board {
                     states.add(belowCell.isAlive());
                 }
 
+                if (oldStateOfCells.containsKey(belowLeftDiagonalPosition.getX() + "-" + belowLeftDiagonalPosition.getY())) {
+                    Cell belowLeftDiagonal = oldStateOfCells.get(belowLeftDiagonalPosition.getX() + "-" + belowLeftDiagonalPosition.getY());
+                    states.add(belowLeftDiagonal.isAlive());
+                }
+
+                if (oldStateOfCells.containsKey(belowRightDiagonalPosition.getX() + "-" + belowRightDiagonalPosition.getY())) {
+                    Cell belowRightDiagonal = oldStateOfCells.get(belowRightDiagonalPosition.getX() + "-" + belowRightDiagonalPosition.getY());
+                    states.add(belowRightDiagonal.isAlive());
+                }
+
+                if (oldStateOfCells.containsKey(aboveLeftDiagonalPosition.getX() + "-" + aboveLeftDiagonalPosition.getY())) {
+                    Cell aboveLeftDiagonal = oldStateOfCells.get(aboveLeftDiagonalPosition.getX() + "-" + aboveLeftDiagonalPosition.getY());
+                    states.add(aboveLeftDiagonal.isAlive());
+                }
+
+                if (oldStateOfCells.containsKey(aboveRightDiagonalPosition.getX() + "-" + aboveRightDiagonalPosition.getY())) {
+                    Cell aboveRightDiagonal = oldStateOfCells.get(aboveRightDiagonalPosition.getX() + "-" + aboveRightDiagonalPosition.getY());
+                    states.add(aboveRightDiagonal.isAlive());
+                }
+
                 long aliveOnes = states.stream().filter(s -> s).count();
-//                System.out.printf("Live Ones %d", aliveOnes);
                 if (aliveOnes == 0L) {
                     return;
                 }
@@ -78,8 +102,6 @@ public class Board {
                 if (currentCell.isAlive()) {
                     if (aliveOnes < 2 || aliveOnes > 3) {
                         currentCell.setAlive(false);
-                    } else if (aliveOnes == 2 || aliveOnes == 3) {
-                        currentCell.setAlive(true);
                     }
                 } else {
                     if (aliveOnes == 3) {
@@ -89,6 +111,7 @@ public class Board {
                 oldStateOfCells.put(currentPosition.getX() + "-" + currentPosition.getY(), currentCell);
                 new ConsolePrinter().print(rows, cols, oldStateOfCells);
             });
+
         }
     }
 

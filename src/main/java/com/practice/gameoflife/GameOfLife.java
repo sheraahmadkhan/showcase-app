@@ -21,6 +21,7 @@ public class GameOfLife implements Runnable {
     }
 
     public static void main(String[] args) {
-        new GameOfLife(5, 5).run();
+//        new Thread(new GameOfLife(5, 5)).start();
+        new GameOfLife(4, 4).run();
     }
 }

@@ -51,6 +51,38 @@ public class Cell implements SurroundingAware {
     }
 
     @Override
+    public Position belowLeftDiagonal() {
+        Position newPosition = new Position(currentPosition());
+        newPosition.incX();
+        newPosition.decY();
+        return newPosition;
+    }
+
+    @Override
+    public Position belowRightDiagonal() {
+        Position newPosition = new Position(currentPosition());
+        newPosition.incX();
+        newPosition.incY();
+        return newPosition;
+    }
+
+    @Override
+    public Position aboveLeftDiagonal() {
+        Position newPosition = new Position(currentPosition());
+        newPosition.decX();
+        newPosition.decY();
+        return newPosition;
+    }
+
+    @Override
+    public Position aboveRightDiagonal() {
+        Position newPosition = new Position(currentPosition());
+        newPosition.decX();
+        newPosition.incY();
+        return newPosition;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -54,4 +54,52 @@ public class CellTest {
         assertEquals(expectedAboveCell.currentPosition(), result);
         assertEquals(new Position(0, 0), cell.currentPosition());
     }
+
+    @Test
+    public void cellShouldKnowItsBelowLeftDiagonalCell() {
+        Cell cell = new Cell(0, 0);
+
+        Cell expectedCell = new Cell(1, -1);
+
+        Position result = cell.belowLeftDiagonal();
+
+        assertEquals(expectedCell.currentPosition(), result);
+        assertEquals(new Position(0, 0), cell.currentPosition());
+    }
+
+    @Test
+    public void cellShouldKnowItsBelowRightDiagonalCell() {
+        Cell cell = new Cell(0, 0);
+
+        Cell expectedCell = new Cell(1, 1);
+
+        Position result = cell.belowRightDiagonal();
+
+        assertEquals(expectedCell.currentPosition(), result);
+        assertEquals(new Position(0, 0), cell.currentPosition());
+    }
+
+    @Test
+    public void cellShouldKnowItsAboveLeftDiagonalCell() {
+        Cell cell = new Cell(0, 0);
+
+        Cell expectedCell = new Cell(-1, -1);
+
+        Position result = cell.aboveLeftDiagonal();
+
+        assertEquals(expectedCell.currentPosition(), result);
+        assertEquals(new Position(0, 0), cell.currentPosition());
+    }
+
+    @Test
+    public void cellShouldKnowItsAboveRightDiagonalCell() {
+        Cell cell = new Cell(0, 0);
+
+        Cell expectedCell = new Cell(-1, 1);
+
+        Position result = cell.aboveRightDiagonal();
+
+        assertEquals(expectedCell.currentPosition(), result);
+        assertEquals(new Position(0, 0), cell.currentPosition());
+    }
 }

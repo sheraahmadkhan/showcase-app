@@ -11,4 +11,12 @@ public interface SurroundingAware {
     Position above();
 
     Position below();
+
+    Position belowLeftDiagonal();
+
+    Position belowRightDiagonal();
+
+    Position aboveLeftDiagonal();
+
+    Position aboveRightDiagonal();
 }
